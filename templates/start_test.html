@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .question p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .question input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test: {{ test_id }}</h1>
+
+        <form method="POST">
+            {% for question in questions %}
+                <div class="question">
+                    <p>{{ question[1] }}</p>
+                    <input type="radio" name="question_{{ loop.index }}" value="1"> {{ question[2] }}<br>
+                    <input type="radio" name="question_{{ loop.index }}" value="2"> {{ question[3] }}<br>
+                    <input type="radio" name="question_{{ loop.index }}" value="3"> {{ question[4] }}<br>
+                    <input type="radio" name="question_{{ loop.index }}" value="4"> {{ question[5] }}<br>
+                </div>
+            {% endfor %}
+
+            <button type="submit">Submit Test</button>
+        </form>
+    </div>
+</body>
+</html>

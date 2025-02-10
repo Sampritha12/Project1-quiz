@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1, h2, h3 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .question-container {
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Test: {{ test['test_name'] }}</h1>
+        
+        <form method="POST">
+            <label for="start_time">Start Time:</label>
+            <input type="datetime-local" name="start_time" value="{{ test['start_time'] }}" required>
+
+            <label for="end_time">End Time:</label>
+            <input type="datetime-local" name="end_time" value="{{ test['end_time'] }}" required>
+
+            <h2>Questions</h2>
+            {% for question in questions %}
+                <div class="question-container">
+                    <h3>Question {{ loop.index }}</h3>
+
+                    <input type="text" name="question_{{ loop.index0 }}" value="{{ question[1] }}" required placeholder="Enter Question">
+                    <input type="text" name="option1_{{ loop.index0 }}" value="{{ question[2] }}" required placeholder="Option 1">
+                    <input type="text" name="option2_{{ loop.index0 }}" value="{{ question[3] }}" required placeholder="Option 2">
+                    <input type="text" name="option3_{{ loop.index0 }}" value="{{ question[4] }}" required placeholder="Option 3">
+                    <input type="text" name="option4_{{ loop.index0 }}" value="{{ question[5] }}" required placeholder="Option 4">
+
+                    <label for="correct_option_{{ loop.index0 }}">Correct Option:</label>
+                    <select name="correct_option_{{ loop.index0 }}">
+                        <option value="option1" {% if question[6] == 'option1' %}selected{% endif %}>Option 1</option>
+                        <option value="option2" {% if question[6] == 'option2' %}selected{% endif %}>Option 2</option>
+                        <option value="option3" {% if question[6] == 'option3' %}selected{% endif %}>Option 3</option>
+                        <option value="option4" {% if question[6] == 'option4' %}selected{% endif %}>Option 4</option>
+                    </select>
+                </div>
+            {% endfor %}
+
+            <button class="btn" type="submit">Submit Changes</button>
+        </form>
+    </div>
+</body>
+</html>

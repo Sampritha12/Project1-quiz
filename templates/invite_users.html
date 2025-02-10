@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite Users to Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            margin-top: 15px;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .checkbox-group input {
+            margin-right: 8px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .back-link {
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Invite Users to Take the Test</h2>
+        
+        <form method="POST">
+            <label for="users">Select Users to Invite:</label>
+            <div class="checkbox-group">
+                {% for user in users %}
+                    <label><input type="checkbox" name="users" value="{{ user[0] }}"> {{ user[0] }}</label>
+                {% endfor %}
+            </div>
+            <button type="submit">Send Invitations</button>
+        </form>
+        
+        <a class="back-link" href="{{ url_for('admin') }}">← Back to Admin Dashboard</a>
+    </div>
+</body>
+</html>
